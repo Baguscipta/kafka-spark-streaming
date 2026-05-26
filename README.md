@@ -208,6 +208,7 @@ docker exec kafka kafka-topics --create \
   --partitions 3 \
   --topic transactions_dlq \
   --if-not-exists
+```
 
 ---
 
