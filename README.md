@@ -180,20 +180,34 @@ docker-compose up -d
 docker-compose ps
 ```
 
-### 4. Cek Kafka Topics
+### 4. Buat Kafka Topics Secara Manual
 
-Topic akan dibuat otomatis oleh service `kafka-init`. Verifikasi:
+Buat seluruh topic yang dibutuhkan sebelum menjalankan producer dan streaming job.
 
 ```bash
-docker exec kafka kafka-topics --list --bootstrap-server localhost:9092
-```
+# Buat topic transactions
+docker exec kafka kafka-topics --create \
+  --bootstrap-server localhost:9092 \
+  --replication-factor 1 \
+  --partitions 3 \
+  --topic transactions \
+  --if-not-exists
 
-Output yang diharapkan:
-```
-transactions
-transactions_dlq
-transactions_valid
-```
+# Buat topic transactions_valid
+docker exec kafka kafka-topics --create \
+  --bootstrap-server localhost:9092 \
+  --replication-factor 1 \
+  --partitions 3 \
+  --topic transactions_valid \
+  --if-not-exists
+
+# Buat topic transactions_dlq
+docker exec kafka kafka-topics --create \
+  --bootstrap-server localhost:9092 \
+  --replication-factor 1 \
+  --partitions 3 \
+  --topic transactions_dlq \
+  --if-not-exists
 
 ---
 
