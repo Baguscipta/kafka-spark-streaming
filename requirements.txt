@@ -1,0 +1,13 @@
+# ============================================================
+# Requirements - Kafka + PySpark Streaming Project
+# Install semua sekaligus: pip install -r requirements.txt
+# ============================================================
+
+# --- Kafka Producer ---
+kafka-python==2.0.2          # Kafka client untuk Python (producer & consumer)
+
+# --- PySpark Streaming ---
+pyspark==3.5.0               # Apache Spark dengan Structured Streaming
+
+# --- Utilities ---
+python-dotenv==1.0.0         # Load environment variable dari file .env

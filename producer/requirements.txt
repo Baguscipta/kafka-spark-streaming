@@ -1,0 +1,6 @@
+# ============================================================
+# Producer Dependencies
+# Install: pip install -r producer/requirements.txt
+# ============================================================
+kafka-python==2.0.2
+python-dotenv==1.0.0
