@@ -1,11 +1,4 @@
 # 🚀 Real-Time Transaction Pipeline with Kafka & PySpark Streaming
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://www.python.org/)
-[![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-7.5.0-black)](https://kafka.apache.org/)
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.5.0-orange)](https://spark.apache.org/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-blue)](https://docs.docker.com/compose/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-
 ---
 
 ## 📌 Project Overview
@@ -18,53 +11,7 @@ Project ini adalah implementasi **Real-Time Data Pipeline** menggunakan **Apache
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                     KAFKA + PYSPARK PIPELINE                        │
-└─────────────────────────────────────────────────────────────────────┘
-
-  ┌────────────┐    JSON Events     ┌──────────────────────┐
-  │  Producer  │ ──────────────────▶│  Kafka Topic         │
-  │ (Python)   │  1-2 det/event     │  [ transactions ]    │
-  │            │                    └──────────┬───────────┘
-  │ ✅ Valid   │                               │
-  │ ❌ Invalid │                               │ readStream
-  │ ⏰ Late    │                               ▼
-  │ 🔁 Dupl.  │                    ┌──────────────────────┐
-  └────────────┘                   │   PySpark            │
-                                   │   Structured         │
-                                   │   Streaming          │
-                                   │                      │
-                                   │  1. Parse JSON       │
-                                   │  2. Validate         │
-                                   │  3. Detect Late      │
-                                   │  4. Detect Dupl.     │
-                                   │  5. Watermark        │
-                                   └──────────┬───────────┘
-                                              │
-                              ┌───────────────┴───────────────┐
-                              │                               │
-                              ▼                               ▼
-                   ┌──────────────────┐           ┌──────────────────┐
-                   │  transactions_   │           │  transactions_   │
-                   │  valid           │           │  dlq             │
-                   │                  │           │                  │
-                   │  ✅ Valid events │           │  ❌ Invalid      │
-                   │                  │           │  ⏰ Late         │
-                   └──────────────────┘           │  🔁 Duplicate   │
-                                                  └──────────────────┘
-                              │
-                              ▼
-                   ┌──────────────────────────────┐
-                   │   Console Window Output       │
-                   │                              │
-                   │  Tumbling Window (1 menit)   │
-                   │  - timestamp                 │
-                   │  - trx_count                 │
-                   │  - total_amount              │
-                   │  - running_total             │
-                   └──────────────────────────────┘
-```
+> ![Kafka UI Topics](docs/architecture.png)
 
 ---
 
@@ -605,14 +552,6 @@ docker exec kafka kafka-consumer-groups --describe --group <group-id> --bootstra
 | **Retry** | Reprocessing event dari DLQ setelah perbaikan |
 | **Scaling** | Multi-partition + multi-consumer group |
 
----
-
-## 👨‍💻 Author
-
-**[Nama Kamu]** — Data Engineer
-
-- GitHub: [@username](https://github.com/username)
-- LinkedIn: [linkedin.com/in/username](https://linkedin.com/in/username)
 
 ---
 
