@@ -6,6 +6,8 @@
 Project ini adalah implementasi **Real-Time Data Pipeline** menggunakan **Apache Kafka** dan **PySpark Structured Streaming**. Pipeline ini mensimulasikan sistem pemrosesan transaksi keuangan secara real-time, lengkap dengan validasi data, deteksi duplikat, watermark handling, dan routing ke Dead Letter Queue (DLQ).
 
 **Dibuat untuk:** Data Engineering Assignment — *Building Real-Time Data Pipelines with Kafka and Spark Streaming*
+
+
 **oleh: Bagus Cipta Pratama**
 
 ---
